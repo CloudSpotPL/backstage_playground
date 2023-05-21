@@ -5,7 +5,7 @@ metadata:
   title: Hello World
   description: Says Hello to a specified name.
 spec:
-  owner: guests
+  owner: nietakipawel
   type: service
 
   parameters:
