@@ -1,0 +1,40 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: vault-onboarding
+  title: Hashi Vault onboarding
+  description: Creates a request for a team key/value store in Hashi Vault
+  tags:
+    - vault
+spec:
+  owner: group:cld-rdswf-devsecops
+  type: service
+
+  parameters:
+    - title: You are about to request access to a shared team key/value store in Vault
+      required:
+        - azure_object_id
+
+      properties:
+        azure_object_id:
+          title: Object ID for your team
+          type: string
+          description: The object ID for the group in Azure active directory that matches your team
+
+  steps:
+    - id: run-onboarding
+      name: Run onboarding
+      action: github:actions:dispatch
+      input:
+        repoUrl: 'github.com?repo=rdswf-vault-onboarder&owner=volvo-cars'
+        workflowId: 'open-issue.yaml'
+        branchOrTagName: 'main'
+        workflowInputs:
+          azure_object_id: ${{ parameters.azure_object_id }}
+    - id: log
+      needs: run-onboarding
+      name: Log output
+      action: debug:log
+      input:
+        message: |
+          Your request for access has been received, you can follow the progress at https://github.com/volvo-cars/rdswf-vault-onboarder/issues.
