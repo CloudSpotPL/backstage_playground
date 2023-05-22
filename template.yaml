@@ -15,6 +15,12 @@ spec:
       properties:
         name:
           type: string
+    - title: Elo
+      required:
+        - Second
+      properties:
+        second:
+          type: string
 
   steps:
     - id: log-message
