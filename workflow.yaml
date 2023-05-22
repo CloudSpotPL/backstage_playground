@@ -1,13 +1,13 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: vault-onboarding
-  title: Hashi Vault onboarding
-  description: Creates a request for a team key/value store in Hashi Vault
+  name: onboarding
+  title: Azure Onboarding
+  description: Onboard to Azure
   tags:
-    - vault
+    - azure
 spec:
-  owner: group:cld-rdswf-devsecops
+  owner: nietakipawel
   type: service
 
   parameters:
