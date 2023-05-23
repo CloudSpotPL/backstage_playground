@@ -28,10 +28,7 @@ spec:
         branchOrTagName: 'main'
         workflowInputs:
           azure_object_id: ${{ parameters.azure_object_id }}
-    - id: log
-      needs: run-onboarding
-      name: Result
-      action: debug:log
-      input:
-        message: |
-          RG created
+  output:
+     links:
+      - title: Check status of your onboarding at
+        url: https://github.com/volvo-cars/sentry-saas/actions
