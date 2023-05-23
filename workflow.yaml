@@ -31,4 +31,4 @@ spec:
   output:
      links:
       - title: Check status of your onboarding at
-        url: https://github.com/volvo-cars/sentry-saas/actions
+        url: https://github.com/CloudSPotPL/backstage_playground/actions
