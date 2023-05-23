@@ -15,21 +15,18 @@ spec:
         - azure_object_id
         - location
       properties:
-       - azure_object_id:
+        azure_object_id:
           title: Object ID for your team
           type: string
           description: The object ID for the group in Azure active directory that matches your team
-       - volume_type:
-          title: Volume Type
+        platform:
+          title: Platform name
           type: string
-          description: The volume type to be used
-          default: gp2
+          description: Select the preferred platform for Sentry Project
+          default: none
           enum:
-            - westeurope
-            - westus
-          enumNames:
-           - 'General Purpose SSD (gp2)'
-           - 'General Purpose SSD (gp3)'
+          - android
+          - apple
   steps:
     - id: run-onboarding
       name: Run onboarding
