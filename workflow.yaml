@@ -28,3 +28,7 @@ spec:
         branchOrTagName: 'main'
         workflowInputs:
           azure_object_id: ${{ parameters.azure_object_id }}
+  output:
+    links:
+      - title: Check status of your onboarding at
+        url: https://github.com/CloudSpotPL/backstage_playground/actions
