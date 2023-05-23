@@ -34,5 +34,4 @@ spec:
       action: debug:log
       input:
         message: |
-          Your request for access has been received, you can follow the progress at https://github.com/volvo-cars/rdswf-vault-onboarder/issues.
           RG created
