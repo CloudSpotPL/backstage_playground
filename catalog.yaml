@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: terroir-tracking-web
   description: Find where your juice comes from
+  annotations:
+  backstage.io/techdocs-ref: value
 spec:
   type: website
   lifecycle: production
