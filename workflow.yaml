@@ -10,22 +10,14 @@ spec:
   owner: nietakipawel
   type: service
   parameters:
-   - title: We need few params from you
+    - title: You are about to request access to a shared team key/value store in Vault
       required:
         - azure_object_id
       properties:
         azure_object_id:
-          title: RG Name
+          title: Object ID for your team
           type: string
           description: The object ID for the group in Azure active directory that matches your team
-        platform:
-          title: Platform name
-          type: string
-          description: Select the preferred platform for Sentry Project
-          default: none
-          enum:
-          - westeurope
-          - westus
   steps:
     - id: run-onboarding
       name: Run onboarding
@@ -36,11 +28,11 @@ spec:
         branchOrTagName: 'main'
         workflowInputs:
           azure_object_id: ${{ parameters.azure_object_id }}
-          location: ${{ parameters.platform }}
     - id: log
       needs: run-onboarding
       name: Result
       action: debug:log
       input:
         message: |
+          Your request for access has been received, you can follow the progress at https://github.com/volvo-cars/rdswf-vault-onboarder/issues.
           RG created
