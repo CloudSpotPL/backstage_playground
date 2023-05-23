@@ -9,12 +9,3 @@ spec:
   lifecycle: unknown
   owner: guests
 
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: terroir-tracking-web
-  description: Find where your juice comes from
-spec:
-  type: website
-  lifecycle: production
-  owner: tracking-team
