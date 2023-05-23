@@ -9,18 +9,17 @@ metadata:
 spec:
   owner: nietakipawel
   type: service
-
   parameters:
     - title: We need few params from you
       required:
         - azure_object_id
         - location
       properties:
-      - azure_object_id:
+       - azure_object_id:
           title: Object ID for your team
           type: string
           description: The object ID for the group in Azure active directory that matches your team
-      - volume_type:
+       - volume_type:
           title: Volume Type
           type: string
           description: The volume type to be used
@@ -28,9 +27,9 @@ spec:
           enum:
             - westeurope
             - westus
-        enumNames:
-          - 'General Purpose SSD (gp2)'
-          - 'General Purpose SSD (gp3)'
+          enumNames:
+           - 'General Purpose SSD (gp2)'
+           - 'General Purpose SSD (gp3)'
   steps:
     - id: run-onboarding
       name: Run onboarding
