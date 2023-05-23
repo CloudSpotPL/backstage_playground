@@ -4,7 +4,7 @@ metadata:
   name: terroir-tracking-web
   description: Find where your juice comes from
   annotations:
-  backstage.io/techdocs-ref: value
+  backstage.io/techdocs-ref: dir:.
 spec:
   type: website
   lifecycle: production
