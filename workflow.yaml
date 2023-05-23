@@ -10,10 +10,9 @@ spec:
   owner: nietakipawel
   type: service
   parameters:
-    - title: We need few params from you
+   - title: We need few params from you
       required:
         - azure_object_id
-        - location
       properties:
         azure_object_id:
           title: Object ID for your team
