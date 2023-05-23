@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+    inputs:
+      azure_object_id:
+        description: 'Azure AD group object ID'
+        required: true
+
+name: Create reques
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Created!"
+
