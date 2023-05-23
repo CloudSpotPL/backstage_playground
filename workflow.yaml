@@ -15,7 +15,7 @@ spec:
         - azure_object_id
       properties:
         azure_object_id:
-          title: Object ID for your team
+          title: RG Name
           type: string
           description: The object ID for the group in Azure active directory that matches your team
         platform:
@@ -24,8 +24,8 @@ spec:
           description: Select the preferred platform for Sentry Project
           default: none
           enum:
-          - android
-          - apple
+          - westeurope
+          - westus
   steps:
     - id: run-onboarding
       name: Run onboarding
