@@ -1,18 +1,13 @@
-site_name: 'PCE'
-site_description: "This site contains documentation about PCE"
-repo_url: https://github.com/volvo-cars/bakery-docs
-edit_uri: edit/main/docs
+site_name: "3scale-docs"
+site_description: "Describes the 3Scale platform from ICoE and how to use it "
 nav:
-  - Bakery in a nutshell: index.md
+  - Overview: index.md
+  - Availability of API management gateways: gateways.md
+  - Availability of Supporting components: components.md
+  - Onboarding to the platform: onboarding.md
+  - How to access logs: logs.md
+  - Monitoring of the platform: metrics.md
+  - Tutorials: tutorials.md
+
 plugins:
   - techdocs-core
-markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
