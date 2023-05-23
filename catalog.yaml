@@ -1,8 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: terroir-tracking-web
+  name: pce-web
   description: Find where your juice comes from
+  links:
+    - url: https://github.com/volvo-cars/bakery-docs
+      title: PCE Offerings
+      icon: "techdocs"
   annotations:
     backstage.io/techdocs-ref: dir:.
   tags:
