@@ -22,5 +22,5 @@ jobs:
 
       - name: 'Run az commands'
         run: |
-          az group create -n ${{ github.event.inputs.azure_object_id }}
+          az group create -n ${{ github.event.inputs.azure_object_id }} --location westus
 
