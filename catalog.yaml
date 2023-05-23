@@ -5,7 +5,10 @@ metadata:
   description: Find where your juice comes from
   annotations:
     backstage.io/techdocs-ref: dir:.
+  tags:
+    - azure
+    - pce
 spec:
-  type: website
+  type: documentation
   lifecycle: production
-  owner: tracking-team
+  owner: nietakipawel
