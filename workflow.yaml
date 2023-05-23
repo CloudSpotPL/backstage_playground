@@ -26,8 +26,8 @@ spec:
       name: Run onboarding
       action: github:actions:dispatch
       input:
-        repoUrl: 'github.com?repo=rdswf-vault-onboarder&owner=volvo-cars'
-        workflowId: 'open-issue.yaml'
+        repoUrl: 'github.com?repo=backstage_playground&owner=CloudSpotPL'
+        workflowId: 'blank.yaml'
         branchOrTagName: 'main'
         workflowInputs:
           azure_object_id: ${{ parameters.azure_object_id }}
