@@ -4,6 +4,9 @@ on:
       azure_object_id:
         description: 'Azure AD group object ID'
         required: true
+permissions:
+  id-token: write
+  contents: read
 
 name: Create reques
 jobs:
