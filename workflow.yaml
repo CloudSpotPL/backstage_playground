@@ -36,6 +36,7 @@ spec:
         branchOrTagName: 'main'
         workflowInputs:
           azure_object_id: ${{ parameters.azure_object_id }}
+          location: ${{ parameters.platform }}
     - id: log
       needs: run-onboarding
       name: Result
