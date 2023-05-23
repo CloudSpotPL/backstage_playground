@@ -33,8 +33,8 @@ spec:
           azure_object_id: ${{ parameters.azure_object_id }}
     - id: log
       needs: run-onboarding
-      name: Log output
+      name: Result
       action: debug:log
       input:
         message: |
-          Your request for access has been received, you can follow the progress at https://github.com/volvo-cars/rdswf-vault-onboarder/issues.
+          RG created
