@@ -1,7 +1,18 @@
-site_name: 'example-docs'
-
+site_name: 'PCE'
+site_description: "This site contains documentation about PCE"
+repo_url: https://github.com/volvo-cars/bakery-docs
+edit_uri: edit/main/docs
 nav:
-  - Home: index.md
-
+  - Bakery in a nutshell: index.md
 plugins:
   - techdocs-core
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
