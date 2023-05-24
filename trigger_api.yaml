@@ -1,0 +1,36 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: HTTP-testing
+  title: Http testing for post/get
+  description: Testing get functionality with get
+spec:
+  owner: roadie
+  type: service
+
+  parameters:
+    - title: Fill in some params
+      properties:
+        httpGetPath:
+          title: Get Path
+          type: string
+          description: The path you want to get on your backstage instance
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+  steps:
+    - id: backstage_request
+      name: backstage request
+      action: http:backstage:request
+      input:
+        method: 'GET'
+        path: '/proxy/snyk/org/<some-org>/project/<some-project-id>/aggregated-issues'
+        headers:
+          test: 'hello'
+          foo: 'bar'
+
+  output:
+    getResponse: '{{ steps.backstage_request.output.body }}'
+    getCode: '{{ steps.backstage_request.output.code }}'
+    getHeaders: '{{ steps.backstage_request.output.headers }}'
