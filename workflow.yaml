@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: onboarding
-  title: Azure Onboarding
+  title: Azure Onboarding - Mahes
   description: Onboard to Azure
   tags:
     - azure
