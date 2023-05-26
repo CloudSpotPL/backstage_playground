@@ -25,7 +25,7 @@ spec:
       action: http:backstage:request
       input:
         method: 'GET'
-        path: 'https://www.githubstatus.com/api/v2/status.json'
+        path: '/proxy/snyk/https://www.githubstatus.com/api/v2/status.json'
         headers:
           test: 'hello'
           foo: 'bar'
