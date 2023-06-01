@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: pce-order-rg
+  name: PCE Team Offerings
   description: Find where your Azure Platform born
   links:
     - url: https://github.com/volvo-cars/bakery-docs
