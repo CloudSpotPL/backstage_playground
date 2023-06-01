@@ -28,7 +28,7 @@ spec:
       action: github:actions:dispatch
       input:
         repoUrl: 'github.com?repo=backstage_playground&owner=CloudSpotPL'
-        workflowId: 'blank.yaml'
+        workflowId: 'rg.yaml'
         branchOrTagName: 'main'
         workflowInputs:
           rg_name: ${{ parameters.rg_name }}
