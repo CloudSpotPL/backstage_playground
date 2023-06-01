@@ -12,6 +12,7 @@ spec:
   owner: pce-azure
   type: service
   memberOf: ['component:pce-azure-platform-offerings']
+  subcomponentOf: ['component:pce-azure-platform-offerings'] 
   parameters:
     - title: You are about to request Azure Resource Group creation
       required:
