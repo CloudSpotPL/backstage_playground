@@ -29,7 +29,7 @@ spec:
         workflowId: 'sa.yaml'
         branchOrTagName: 'main'
         workflowInputs:
-          st_name: ${{ parameters.rg_name }}
+          st_name: ${{ parameters.st_name }}
   output:
     links:
       - title: Check status of your onboarding at
