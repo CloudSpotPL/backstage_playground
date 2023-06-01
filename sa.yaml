@@ -1,0 +1,38 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: onboarding
+  title: Create Azure Storage Account
+  description: Create Azure Storage Account
+  tags:
+    - azure
+    - resource-storage-account
+    - azure-quickstart
+spec:
+  owner: pce-azure
+  type: service
+  memberOf: ['component:pce-azure-platform-offerings']
+  subcomponentOf: ['component:pce-azure-platform-offerings'] 
+  parameters:
+    - title: You are about to request Azure Storage Account creation
+      required:
+        - rg_name
+      properties:
+        st_name:
+          title: Provide your project name
+          type: string
+          description: Your project ID
+  steps:
+    - id: run-onboarding
+      name: Run onboarding
+      action: github:actions:dispatch
+      input:
+        repoUrl: 'github.com?repo=backstage_playground&owner=CloudSpotPL'
+        workflowId: 'sa.yaml'
+        branchOrTagName: 'main'
+        workflowInputs:
+          st_name: ${{ parameters.rg_name }}
+  output:
+    links:
+      - title: Check status of your onboarding at
+        url: https://github.com/CloudSpotPL/backstage_playground/actions
