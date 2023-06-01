@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: onboarding
+  name: pce-rg-offering
   title: Create Azure Resource Group
   description: Create Azure Resource Group
   tags:
