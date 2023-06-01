@@ -17,3 +17,4 @@ spec:
   lifecycle: production
   owner: pce-azure
   system: azure-platform
+  partof: ['component:pce-azure-platform-offerings']
