@@ -31,7 +31,7 @@ spec:
         workflowId: 'blank.yaml'
         branchOrTagName: 'main'
         workflowInputs:
-          azure_object_id: ${{ parameters.rg_name }}
+          rg_name: ${{ parameters.rg_name }}
   output:
     links:
       - title: Check status of your onboarding at
