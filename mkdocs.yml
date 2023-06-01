@@ -6,3 +6,4 @@ nav:
 
 plugins:
   - techdocs-core
+  - kroki
