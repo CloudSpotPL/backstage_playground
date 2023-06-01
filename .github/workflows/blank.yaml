@@ -10,17 +10,18 @@ permissions:
 name: Create resource
 run-name: Create resource rg-${{ github.event.inputs.rg_name }}
 jobs:
-  create:
+ create_rg:
+    name: Deployment
     runs-on: ubuntu-latest
     steps:
-      - name: 'Az CLI login using OIDC'
+      - name: 'Login to Azure using Federated Credentials'
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: 'Run az commands'
+      - name: 'Create Resource Group'
         run: |
           az group create -n 'rg-${{ github.event.inputs.rg_name }}' --location westus
 
