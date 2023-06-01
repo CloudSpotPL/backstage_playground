@@ -2,18 +2,17 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: pce-order-rg
-  description: Find where your juice comes from
+  description: Find where your Azure Platform born
   links:
     - url: https://github.com/volvo-cars/bakery-docs
       title: PCE Offerings
       icon: "techdocs"
   annotations:
     backstage.io/techdocs-ref: dir:.
-    github.com/project-slug: 'backstage/backstage'
   tags:
     - azure
     - pce
 spec:
   type: documentation
   lifecycle: production
-  owner: nietakipawel
+  owner: pce-azure
