@@ -55,7 +55,7 @@ sequenceDiagram
 ```
 
 ## Vending Machine LL flow
-```mermaid
+```kroki-mermaid
 flowchart TD
     X[Vending Machine Feeder]-->A[Payload Non-Prod]
     A-->AA[Create Subscription]
@@ -110,10 +110,10 @@ flowchart TD
 | Policy Assignment | [VCC]ConfigureDefaultNSGandRTonSub | |
 
 where: \
-var.short_location - cn3 \
-var.app_id - Application ID \
-var.arch_type - Architecture Type (Online|Corp) \
-var.env_type - Environment (prod|nonprod) \
-var.suffix - Random 3 digit suffix, subscription specific
+- var.short_location - cn3 \
+- var.app_id - Application ID \
+- var.arch_type - Architecture Type (Online|Corp) \
+- var.env_type - Environment (prod|nonprod) \
+- var.suffix - Random 3 digit suffix, subscription specific
 
 
