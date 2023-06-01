@@ -2,7 +2,7 @@ site_name: "PCE-Innovation-Week-Documentation"
 site_description: "Our offering documentation"
 nav:
   - Overview: index.md
-  - Team Memebrs: members.md
+  - Team Members: members.md
 
 plugins:
   - techdocs-core
