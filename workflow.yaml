@@ -2,22 +2,24 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: onboarding
-  title: Azure Onboarding - Mahes
-  description: Onboard to Azure
+  title: Create Azure Resource Group
+  description: Create Azure Resource Group
   tags:
     - azure
+    - resource-group
+    - azure-quickstart
 spec:
-  owner: nietakipawel
+  owner: pce-azure
   type: service
   parameters:
-    - title: You are about to request access to a shared team key/value store in Vault
+    - title: You are about to request Azure Resource Group creation
       required:
-        - azure_object_id
+        - rg_name
       properties:
-        azure_object_id:
-          title: Object ID for your team
+        rg_name:
+          title: Provide your project name
           type: string
-          description: The object ID for the group in Azure active directory that matches your team
+          description: Your project ID
   steps:
     - id: run-onboarding
       name: Run onboarding
@@ -27,7 +29,7 @@ spec:
         workflowId: 'blank.yaml'
         branchOrTagName: 'main'
         workflowInputs:
-          azure_object_id: ${{ parameters.azure_object_id }}
+          azure_object_id: ${{ parameters.rg_name }}
   output:
     links:
       - title: Check status of your onboarding at
