@@ -11,6 +11,7 @@ name: Create resource
 run-name: Create resource rg-${{ github.event.inputs.rg_name }}
 jobs:
   create:
+    name: Deployment
     runs-on: ubuntu-latest
     steps:
       - name: 'Az CLI login using OIDC'
