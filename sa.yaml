@@ -16,7 +16,7 @@ spec:
   parameters:
     - title: You are about to request Azure Storage Account creation
       required:
-        - rg_name
+        - st_name
       properties:
         st_name:
           title: Provide your project name
