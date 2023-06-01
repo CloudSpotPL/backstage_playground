@@ -11,7 +11,7 @@ metadata:
 spec:
   owner: pce-azure
   type: service
-  partof: ['component:pce-azure-platform-offerings']
+  memberOf: ['component:pce-azure-platform-offerings']
   parameters:
     - title: You are about to request Azure Resource Group creation
       required:
