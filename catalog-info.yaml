@@ -13,6 +13,6 @@ metadata:
     - azure
     - pce
 spec:
-  type: documentation
+  type: offering
   lifecycle: production
   owner: pce-azure
