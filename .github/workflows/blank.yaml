@@ -7,7 +7,7 @@ permissions:
   id-token: write
   contents: read
 
-name: Create resource
+name: 'Create resource: rg-${{ github.event.inputs.rg_name }}'
 jobs:
   create:
     runs-on: ubuntu-latest
