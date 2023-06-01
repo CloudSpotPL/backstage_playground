@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: all-templates
+  description: A list of PCE templates. Each template in this list is auto-imported to Backstage
+spec:
+  targets:
+    - ./sa.yaml
+    - ./rg.yaml
