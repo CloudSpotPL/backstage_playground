@@ -2,7 +2,7 @@
 ---
 ## HL Azure China Subscription Onboarding process
 
-```mermaid
+```kroki-mermaid
 sequenceDiagram
 autonumber
     actor Requestor
@@ -25,7 +25,7 @@ autonumber
 
 # HL Vending Machine flow
 
-```mermaid
+```kroki-mermaid
 sequenceDiagram
 
     actor EA Account Owner
