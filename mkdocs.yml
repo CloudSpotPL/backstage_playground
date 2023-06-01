@@ -3,6 +3,7 @@ site_description: "Our offering documentation"
 nav:
   - Overview: index.md
   - Team Members: members.md
+  - Innovation Week Summary: summary.md
 
 plugins:
   - techdocs-core
