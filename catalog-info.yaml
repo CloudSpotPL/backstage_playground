@@ -16,3 +16,4 @@ spec:
   type: offering
   lifecycle: production
   owner: pce-azure
+  system: azure-platform
