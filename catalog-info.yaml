@@ -1,11 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: 'PCE Team Offerings'
-  description: Find where your Azure Platform born
+  name: pce-azure-platform-offerings
+  description: PCE Team Azure Offerings
   links:
-    - url: https://github.com/volvo-cars/bakery-docs
-      title: PCE Offerings
+    - url: https://learn.microsoft.com/en-us/samples/browse/?expanded=azure&products=azure-resource-manager
+      title: MS Azure QuickStarts
       icon: "techdocs"
   annotations:
     backstage.io/techdocs-ref: dir:.
