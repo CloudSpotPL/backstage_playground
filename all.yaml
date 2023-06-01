@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: templates-all
+  description: A collection of all Backstage templates
+spec:
+  targets:
+    - ./all-templates.yaml
