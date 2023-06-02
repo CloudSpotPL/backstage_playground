@@ -25,6 +25,5 @@ jobs:
         run: |
           echo FOO=foobar--$(date +%s) >> $GITHUB_ENV
           az group create -n 'rg-${{ github.event.inputs.st_name }}-${{env.FOO}}' --location westus
-      
           az storage account create -n 'st${{ github.event.inputs.st_name }}${{env.FOO}}' -g 'rg-${{ github.event.inputs.st_name }}-${{env.FOO}}' -l westus --sku Standard_LRS --public-network-access Disabled
 
