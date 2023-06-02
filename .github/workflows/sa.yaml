@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 name: Create resource
-run-name: Create resource rg-${{ github.event.inputs.st_name }}
+run-name: Create resource ${{ github.event.inputs.st_name }}
 jobs:
   create:
     name: Deployment
