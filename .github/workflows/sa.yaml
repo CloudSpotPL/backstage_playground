@@ -23,8 +23,8 @@ jobs:
 
       - name: 'Creating storage account'
         run: |
-          echo "GH_RANDOM=$(echo shuf -i 100-999 -n 1)" >> $GH_RANDOM
-          az group create -n 'rg-${{ github.event.inputs.st_name }}-{{env.GH_RANDOM}}' --location westus
+          echo FOO=foobar--$(date +%s) >> $GITHUB_ENV
+          az group create -n 'rg-${{ github.event.inputs.st_name }}-${{env.GH_RANDOM}}' --location westus
       
-          az storage account create -n 'st${{ github.event.inputs.st_name }}{{env.GH_RANDOM}}' -g 'rg-${{ github.event.inputs.st_name }}-{{env.GH_RANDOM}}' -l westus --sku Standard_LRS
+          az storage account create -n 'st${{ github.event.inputs.st_name }}${{env.FOO}}' -g 'rg-${{ github.event.inputs.st_name }}-${{env.FOO}}' -l westus --sku Standard_LRS
 
