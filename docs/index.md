@@ -13,107 +13,82 @@ autonumber
     Vending Machine->>Requestor: Notification: Subscriptions with AppId XXXX was just deployed for you
 ```
 
-# HL Architecture
-## Components
-- [GH repository](https://github.com/volvo-cars/mb-azure-china_vending_machine/edit/main/README.md)
-- [GH SH Runner - pce-gh-runner-vem-001](https://portal.azure.com/#@volvocars.onmicrosoft.com/resource/subscriptions/0c6364d5-fd1c-4270-a5dd-bfe600e46d04/resourceGroups/rg-vending-machine-internal-gh-runner/providers/Microsoft.Compute/virtualMachines/gh-runner-001/overview)
-- [GH SH Runner - pce-gh-runner-vem-002](https://portal.azure.com/#@volvocars.onmicrosoft.com/resource/subscriptions/0c6364d5-fd1c-4270-a5dd-bfe600e46d04/resourceGroups/rg-vending-machine-internal-gh-runner/providers/Microsoft.Compute/virtualMachines/gh-runner-001/overview)
-- [MSForms](https://forms.office.com/e/gq2B8MmpTR) 
-- [LogicApps-VendingMachineFeeder](https://portal.azure.com/#@volvocars.onmicrosoft.com/resource/subscriptions/d563d8cd-37a4-4ef8-a495-cc6347ba8124/resourceGroups/rg-cn-vending_machine/providers/Microsoft.Logic/workflows/VendingMachineFeeder/logicApp)
-- [StorageAccount-SubscriptionsInventory](https://portal.azure.com/#@volvocars.onmicrosoft.com/resource/subscriptions/d563d8cd-37a4-4ef8-a495-cc6347ba8124/resourceGroups/rg-cn-vending_machine/providers/Microsoft.Storage/storageAccounts/stcnvendingmachine001/overview)
-- [VendingMachineNotifier](https://portal.azure.com/#@volvocars.onmicrosoft.com/resource/subscriptions/d563d8cd-37a4-4ef8-a495-cc6347ba8124/resourceGroups/rg-cn-vending_machine/providers/Microsoft.Logic/workflows/VendingMachineNotifier/logicApp)
 
-# HL Vending Machine flow
+# Enterprise-Scale - Reference Implementation
 
-```kroki-mermaid
-sequenceDiagram
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/azure/enterprise-scale.svg)](http://isitmaintained.com/project/azure/enterprise-scale "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/azure/enterprise-scale.svg)](http://isitmaintained.com/project/azure/enterprise-scale "Percentage of issues still open")
 
-    actor EA Account Owner
-    EA Account Owner-->> EA Portal: Create Azure CN subscriptions
-    EA Account Owner-->> Subscriptions Inventory: Add created subscriptions to the inventory
-    autonumber
-    actor Requestor
-    box Gray Vending Machine
-    participant Requestor
-    participant Order Form
-    participant Vending Machine Feeder
-    participant Vending Machine
-    participant MSGraph
-    participant MS Teams - PCE
-    participant email - Requestor
-    end
-    Requestor->>Order Form: (AppID, vNET_size, ArchType)
-    Order Form->> Vending Machine Feeder: Feeder Payload
-    Vending Machine Feeder->>Subscriptions Inventory: Get free subscriptions
-    Vending Machine Feeder-->>EA Account Owner: Send notification if there are no free subscriptions
-    Vending Machine Feeder->>IPAM: Get free CIDR
-    Vending Machine Feeder-->>NetOps: Send notification if there are no free CIDRs
-    Vending Machine Feeder->>MSGraph: Get requestor profile
-    Vending Machine Feeder->> Vending Machine: Payload
-    Vending Machine-->>MS Teams - PCE: Send notification if subscriptions createion failed
-    Vending Machine-->>email - Requestor: Send Requestor notification
-```
+## User documentation
 
-## Vending Machine LL flow
-```kroki-mermaid
-flowchart TD
-    X[Vending Machine Feeder]-->A[Payload Non-Prod]
-    A-->AA[Create Subscription]
-    AA-->AAA[Apply Tags]
-    AAA-->C[Create Subscription Owners Security Group]
-    C-->D[Assign Reader role to the subscription]
-    D-->E[Create Sub Owners SPN]
-    E-->F[Assign OwnerLimit-Action to the SPN]
-    F-->G[Create Network Resource Group]
-    G-->H[Create NSG]
-    H-->I[Create vNET]
-    I-->J[Create subnet]
-    J-->K[Assign NSG to the Subnet]
-    K-->L[Network peering]
-    L-->M[Route Table and assignment]
-    M-->N[Create HUB route]
-    N-->O[Move Subscription to the proper Arch Type Management Group]
-    O-->P[Configure default NSG and Routing Table]
-    
-    X[Vending Machine Feeder]-->A1[Payload Prod]
-    A1-->AA1[Create Subscription]
-    AA1-->AAA1[Apply Tags]
-    AAA1-->C1[Create Subscription Owners Security Group]
-    C1-->D1[Assign Reader role to the subscription]
-    D1-->E1[Create Sub Owners SPN]
-    E1-->F1[Assign OwnerLimit-Action to the SPN]
-    F1-->G1[Create Network Resource Group]
-    G1-->H1[Create NSG]
-    H1-->I1[Create vNET]
-    I1-->J1[Create subnet]
-    J1-->K1[Assign NSG to the Subnet]
-    K1-->L1[Network peering]
-    L1-->M1[Route Table and assignment]
-    M1-->N1[Create HUB route]
-    N1-->O1[Move Subscription to the proper Arch Type Management Group]
-    O1-->P1[Configure default NSG and Routing Table]
+To find out more about the Azure landing zones reference implementation, please refer to the [documentation on our Wiki](https://github.com/Azure/Enterprise-Scale/wiki)
 
-```
-## Vending Machine artifacts naming convention
-|Item|Naming convention|Comment|
-|--|--|--|
-| ${var.app_id}-${var.arch_type}-${lower(var.env_type)}-${var.suffix} | |
-| rg-network-${lower(var.env_type)}-001 | |
-| AAD Security Group | cld-cn-${var.app_id}-${var.arch_type}-${var.env_type}-${var.suffix}-sg | |
-| AAD SPN | spn-cn-${var.app_id}-${var.arch_type}-${var.env_type}-${var.suffix} | |
-| Network Security Group | nsg-${var.short_location}-${var.app_id}-${lower(var.env_type)}-001 | |
-| Virtual Network | vnet-${var.short_location}-${var.app_id}-${lower(var.env_type)}-001 | |
-| Subnet | snet-${var.short_location}-${var.app_id}-${lower(var.env_type)}-001 | |
-| vNET Peering | peer-${var.short_location}-${var.app_id}-${lower(var.env_type)}-${var.suffix} | |
-| Route Table | rt-${var.short_location}-${var.app_id}-${lower(var.env_type)}-001 | |
-| Route | ro-vnet-${var.short_location}-${var.app_id}-${lower(var.env_type)}-${var.suffix} | | 
-| Policy Assignment | [VCC]ConfigureDefaultNSGandRTonSub | |
+---
 
-where: \
-- var.short_location - cn3 \
-- var.app_id - Application ID \
-- var.arch_type - Architecture Type (Online|Corp) \
-- var.env_type - Environment (prod|nonprod) \
-- var.suffix - Random 3 digit suffix, subscription specific
+## Objective
 
+The Enterprise-Scale architecture provides prescriptive guidance coupled with Azure best practices, and it follows design principles across the critical design areas for organizations to define their Azure architecture. It will continue to evolve alongside the Azure platform and is ultimately defined by the various design decisions that organizations must make to define their Azure journey.
 
+The Enterprise-Scale architecture is modular by design and allows organizations to start with foundational landing zones that support their application portfolios, and the architecture enables organizations to start as small as needed and scale alongside their business requirements regardless of scale point.
+
+![Animated image showing the modularity of Azure landing zones](./docs/wiki/media/ESLZ.gif)
+
+---
+
+_The Enterprise-Scale architecture represents the strategic design path and target technical state for your Azure environment._
+
+---
+
+Not all enterprises adopt Azure in the same way, so the Enterprise-Scale architecture may vary between customers. Ultimately, the technical considerations and design recommendations of the Enterprise-Scale architecture may lead to different trade-offs based on the customer's scenario. Some variation is expected, but if core recommendations are followed, the resulting target architecture will put the customer on a path to sustainable scale.
+
+The Enterprise-Scale reference implementations in this repository are intended to support Enterprise-Scale Azure adoption and provides prescriptive guidance based on authoritative design for the Azure platform as a whole.
+
+| Key customer landing zone requirement | Enterprise-Scale reference implementations |
+|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Timelines to reach security and compliance requirements for a workload | Enabling all recommendations during setup, will ensure resources are compliant from a monitoring and security perspective |
+| Provides a baseline architecture using multi-subscription design | Yes, for the entire Azure tenant regardless of customer’s scale-point |
+| Best-practices from cloud provider | Yes, proven and validated with customers |
+| Be aligned with cloud provider’s platform roadmap | Yes |
+| UI Experience and simplified setup | Yes, Azure portal |
+| All critical services are present and properly configured according to recommend best practices for identity & access management, governance, security, network and logging | Yes, using a multi-subscription design, aligned with Azure platform roadmap |
+| Automation capabilities (IaC/DevOps) | Yes: ARM, Policy, Bicep and Terraform Modules |
+| Provides long-term self-sufficiency | Yes, enterprise-scale architecture -> 1:N landing zones. Approach & architecture prepare the customer for long-term self-sufficiency, the RIs are there to get you started |
+| Enables migration velocity across the organization | Yes, enterprise-scale architecture -> 1:N landing zones, Architecture includes designs for segmentation and separation of duty to empower teams to act within appropriate landing zones |
+| Achieves operational excellence | Yes. Enables autonomy for platform and application teams with a policy driven governance and management |
+
+## Conditions for success
+
+To fully leverage this reference implementation in this repository, readers must have a collaborative engagement with key customer stakeholders across critical technical domains, such as identity, security, and networking. Ultimately, the success of cloud adoption hinges on cross-discipline cooperation within the organization, since key requisite Enterprise-Scale design decisions are cross cutting, and to be authoritative must involve domain Subject Matter Expertise (SME) and stakeholders within the customer. It is crucial that the organization has defined their [Enterprise-Scale Architecture](./docs/EnterpriseScale-Architecture.md) following the design principles and critical design areas.
+
+It is also assumed that readers have a broad understanding of key Azure constructs and services in order to fully contextualize the prescriptive recommendations contained within Enterprise-Scale.
+<!--
+![Enterprise-Scale ](./docs/wiki/media/ES-process.png)
+-->
+
+## Deploying Enterprise-Scale Architecture in your own environment
+
+The Enterprise-Scale architecture is modular by design and allows customers to start with foundational Landing Zones that support their application portfolios, regardless of whether the applications are being migrated or are newly developed and deployed to Azure. The architecture can scale alongside the customer's business requirements regardless of scale point. In this repository we are providing the following five templates representing different scenarios composed using ARM templates.
+
+| Reference implementation | Description | ARM Template | Link |
+|:-------------------------|:-------------|:-------------|------|
+| Contoso | On-premises connectivity using Azure vWAN |[![Deploy To Azure](https://learn.microsoft.com/en-us/azure/templates/media/deploy-to-azure.svg)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json) | [Detailed description](./docs/reference/contoso/Readme.md) |
+| AdventureWorks | On-premises connectivity with Hub & Spoke  |[![Deploy To Azure](https://learn.microsoft.com/en-us/azure/templates/media/deploy-to-azure.svg)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json) | [Detailed description](./docs/reference/adventureworks/README.md) |
+| WingTip | Azure without hybrid connectivity |[![Deploy To Azure](https://learn.microsoft.com/en-us/azure/templates/media/deploy-to-azure.svg)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Feslz-portal.json) | [Detailed description](./docs/reference/wingtip/README.md) |
+| Trey Research | On-premises connectivity with Hub and Spoke for small Enterprises | [![Deploy To Azure](https://learn.microsoft.com/en-us/azure/templates/media/deploy-to-azure.svg)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2Fdocs%2Freference%2Ftreyresearch%2FarmTemplates%2Fes-lite.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2Fdocs%2Freference%2Ftreyresearch%2FarmTemplates%2Fportal-es-lite.json) | [Detailed description](./docs/reference/treyresearch/README.md) |
+| Azure Gov | Reference implementation that can be deployed to Azure gov and includes all options in a converged experience | [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2FeslzArm.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale%2Fmain%2FeslzArm%2Ffairfaxeslz-portal.json) | N/A
+
+> The Bicep version is now available in Public Preview here: [https://github.com/Azure/ALZ-Bicep](https://github.com/Azure/ALZ-Bicep)
+
+## Contributing
+
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit [Contributor License Agreement (CLA)](https://cla.opensource.microsoft.com).
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
